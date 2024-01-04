@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 
 mongoose
-  .connect(process.env.MONGO_url)
+  .connect(process.env.MONGO_URL)
   .then((res) => {
     console.log(clc.yellowBright("MongoDb is connected"));
   })
