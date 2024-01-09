@@ -3,11 +3,13 @@ const express = require('express');
 require('dotenv').config();
 const session = require('express-session');
 const mongoDbSession = require('connect-mongodb-session')(session);
-const AuthRouter = require('./Controllers/AuthController');
 
 // file imports
 const db = require('./db');
-const { mongo } = require('mongoose');
+const AuthRouter = require('./Controllers/AuthController');
+const BlogRouter = require('./Controllers/BlogController');
+const isAuth = require('./Middlewares/AuthMiddleware');
+const FollowRouter = require('./Controllers/FollowController');
 
 // constants
 const app = express();
@@ -37,6 +39,8 @@ app.get('/', (req, res) => {
 
 // Routes
 app.use('/auth', AuthRouter);
+app.use('/blog', isAuth, BlogRouter);
+app.use('/follow', isAuth, FollowRouter);
 
 app.listen(PORT, () => {
     console.log(clc.yellowBright.underline(`Server listening on:${PORT}`))   

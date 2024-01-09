@@ -5,8 +5,7 @@ const cleanUpAndValidate = ({email, password, name, username }) => {
         if (!email || !name || !username || !password){
             reject("Missing Credentials");
         }
-        if (typeof email !== "string") reject("Datatype of email is incorrect");
-        if (typeof name !== "string") reject("Datatype of name is incorrect");
+
         if (typeof username !== "string")
         reject("Datatype of username is incorrect");
         if (typeof password !== "string")
@@ -16,8 +15,10 @@ const cleanUpAndValidate = ({email, password, name, username }) => {
         reject("Username should be of 3-30 chars");
         if (password.length <= 2 || password.length > 30)
         reject("Password should be of 3-30 chars");
+        if (typeof name !== "string") reject("Name is not a string");
 
         if (!validator.isEmail(email)) reject("Format of email is wrong");
+        
         resolve();
     });
 }
